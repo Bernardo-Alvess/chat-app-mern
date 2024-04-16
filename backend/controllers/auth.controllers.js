@@ -6,16 +6,12 @@ export const signup = async (req, res) => {
     try{
         const {fullName, username, password, confirmedPassword, gender} = req.body
 
-        if(password !== confirmedPassword){
-            return res.status(400).json({error: "Password don't match!"})
-        }
+        if(password !== confirmedPassword) return res.status(400).json({error: "Password don't match!"})
 
         const user = await User.findOne({username})
 
-        if(user){
-            return res.status(400).send({error: "Username already exists!"})
-        }
-
+        if(user) return res.status(400).send({error: "Username already exists!"})
+        
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt)
 
@@ -46,15 +42,15 @@ export const signup = async (req, res) => {
             generateTokenAndSetCookie(newUser._id, res)
             await newUser.save()
 
-            res.status(201).json({
+            return res.status(201).json({
                 _id: newUser._id,
                 fullName: newUser.fullName,
                 username: newUser.userName,
                 profilePic: newUser.profilePic
             })
-        }else{
-            res.status(400).json({ error: 'Invalid user data'})
         }
+
+        res.status(400).json({ error: 'Invalid user data'})
     }catch(error){
 
         console.log('Error in signup controller', error.message)
@@ -62,8 +58,18 @@ export const signup = async (req, res) => {
     }
 }
 
-export const login = (req, res) => {
-    console.log("loginUser")
+export const login = async (req, res) => {
+    const { username, password} = req.body
+
+    const user = await User.findOne({username})
+
+    if(!user) return res.status(400).json({ error: 'User not found'})
+
+    const isPasswordRight = await bcrypt.compare(password, user.password)
+
+    if(!isPasswordRight) return res.status(400).json({ error: "Password does not match!"})
+
+    res.status(200).json({ msg: "sucess"})
 }
 
 export const logout = (req, res) => {
