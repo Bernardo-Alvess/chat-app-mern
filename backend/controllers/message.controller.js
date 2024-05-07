@@ -36,7 +36,7 @@ export const sendMessage = async (req, res) => {
 
         res.status(201).json(newMessage)
     }catch(err){
-        console.log("Error in sendMessage controller: ", err.message)
+        console.log("Error in sendMessage function: ", err.message)
         res.status(500).json({ error: err.message})
     }
     
@@ -60,7 +60,7 @@ export const getMessages = async (req, res) => {
 
     } catch (err) {
 
-        console.log("Error in getMessage controller: ", err.message)
+        console.log("Error in getMessage function: ", err.message)
         res.status(500).json({ error: err.message })
     }
 }

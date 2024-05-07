@@ -51,7 +51,7 @@ export const signup = async (req, res) => {
 
 		res.status(400).json({ error: 'Invalid user data' });
 	} catch (error) {
-		console.log('Error in signup controller', error.message);
+		console.log('Error in signup function', error.message);
 		res.status(500).json({ error: 'Internal server error!' });
 	}
 };
@@ -75,7 +75,7 @@ export const login = async (req, res) => {
 			});
 
 	} catch (error) {
-		console.log('Error in login controller', error.message);
+		console.log('Error in login function', error.message);
 		res.status(500).json({ error: 'Internal server error!' });
 	}
 };
@@ -86,7 +86,7 @@ export const logout = (req, res) => {
 		res.status(200).json({ message: 'Logged out succesfully'})
 
 	} catch (error) {
-		console.log('Error in logout controller', error.message);
+		console.log('Error in logout function', error.message);
 		res.status(500).json({ error: 'Internal server error!' });
 	}
 };
