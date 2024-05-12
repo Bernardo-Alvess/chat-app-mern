@@ -6,8 +6,10 @@ const useSignup = () => {
 
     const signup = async({fullName, username, password, confirmedPassword, gender}) => {
         const success = handleInputErrors({fullName, username, password, confirmedPassword, gender})
+        
         if(!success) return;
-
+        
+        setLoading(true)
         try {
             const res = await fetch('/api/auth/signup', {
                 method: "POST",
@@ -16,7 +18,12 @@ const useSignup = () => {
             })
 
             const data = await res.json()
-            console.log(data)
+            if(data.error){
+                throw new Error(data.error)
+            }
+
+            
+
         } catch (error) {
             toast.error(error.message)
         } finally{
