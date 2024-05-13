@@ -22,8 +22,6 @@ const useSignup = () => {
                 throw new Error(data.error)
             }
 
-            
-
         } catch (error) {
             toast.error(error.message)
         } finally{
