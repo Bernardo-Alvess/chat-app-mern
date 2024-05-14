@@ -10,7 +10,7 @@ const Login = () => {
 
     const { loading, login } = useLogin()
 
-    const handleInputs = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         await login(inputs)
     }
@@ -20,7 +20,7 @@ const Login = () => {
             <h1>
                 <span className='ml-0 text-blue-500 font-semibold'>Chatter 👋</span> 
             </h1>
-            <form onSubmit={handleInputs}>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label className="input input-bordered flex items-center gap-2 my-1">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" /></svg>
@@ -36,8 +36,8 @@ const Login = () => {
                 <Link to="/signup" className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block'>
                     {"Don't"} have an account?
                 </Link>
-                <button className="btn min-w-full mx-auto font-semibold text-center bg-gray-700">
-                    Login
+                <button className="btn min-w-full mx-auto font-semibold text-center bg-gray-700" disabled={loading}>
+                    {loading ? <span className="loading loading-spinner"></span> : 'Login'}
                 </button>
             </form>
             
