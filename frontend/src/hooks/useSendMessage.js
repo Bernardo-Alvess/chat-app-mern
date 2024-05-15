@@ -7,6 +7,7 @@ const useSendMessage = () => {
 
     const sendMessage = async (message) => {
         setLoading(true)
+        console.log(message)
         try {
             const OPTIONS = {
                 method: 'POST',
