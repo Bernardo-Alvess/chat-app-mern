@@ -5,14 +5,12 @@ import Messages from "./Messages"
 import { TiMessages } from "react-icons/ti"
 import { useAuthContext } from "../../context/AuthContext"
 
-// const user = JSON.parse(localStorage.getItem('chat-user'))
-
 const MessageContainer = () => {
     const { selectedConversation, setSelectedConversation } = useConversation()
 
     useEffect(() => {
         return () => setSelectedConversation(null)
-    }, [])
+    }, [setSelectedConversation])
 
     return (
         <div className='md:min-w-[450px] flex flex-col'>
