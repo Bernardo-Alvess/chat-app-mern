@@ -7,7 +7,6 @@ const useSendMessage = () => {
 
     const sendMessage = async (message) => {
         setLoading(true)
-        console.log(message)
         try {
             const OPTIONS = {
                 method: 'POST',
@@ -21,7 +20,7 @@ const useSendMessage = () => {
                 throw new Error(data.error)
             }
             
-            setMessages([...messages, data.message])
+            setMessages([...messages, data])
 
         } catch (error) {
             toast.error(error.message)
