@@ -17,19 +17,7 @@ export const signup = async (req, res) => {
 		const salt = await bcrypt.genSalt(10);
 		const hashedPassword = await bcrypt.hash(password, salt);
 
-		let profilePic = '';
-
-		switch (gender) {
-			case 'female':
-				profilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
-				break;
-			case 'male':
-				profilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
-				break;
-			case 'other':
-				profilePic = `https://avatar.iran.liara.run/username?username=${fullName}`;
-				break;
-		}
+		const profilePic = `https://robohash.org/${username}`
 
 		const newUser = new User({
 			fullName,

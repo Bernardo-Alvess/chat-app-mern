@@ -1,5 +1,6 @@
 import useConversation from '../../zustand/useConversation'
 import { useSocketContext } from '../../context/SocketContext'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Conversation = ({ conversation, lastIndex, emoji}) => {
     const { selectedConversation, setSelectedConversation } = useConversation()
@@ -15,7 +16,7 @@ const Conversation = ({ conversation, lastIndex, emoji}) => {
         onClick={() => setSelectedConversation(conversation)}>
             <div className={`avatar ${isOnline ? 'online' : ''}`}>
                 <div className='w-12 rounded-full'>
-                    <img src={conversation.profilePic} alt="avatar icon" />
+                    <LazyLoadImage loading="lazy" src={conversation.profilePic} alt="avatar icon" />
                 </div>
             </div>
             <div className='flex flex-col flex-1'>
